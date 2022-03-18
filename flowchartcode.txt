@@ -1,0 +1,94 @@
+op2=>operation: import random
+op4=>operation: board_upper = [['X', 'X', 'X', 'X'], ['X', 'X', 'X', 'X'], ['X', 'X', 'X', 'X'], ['X', 'X', 'X', 'X']]
+op6=>operation: words = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H']
+sub8=>subroutine: random.shuffle(words)
+op10=>operation: board = []
+op12=>operation: count = 0
+op14=>operation: row = []
+cond17=>condition: for item in words
+sub38=>subroutine: row.append(item)
+op40=>operation: count += 1
+cond43=>condition: if ((count % 4) == 0)
+sub47=>subroutine: board.append(row)
+op49=>operation: row = []
+st57=>start: start print_board
+io59=>inputoutput: input: board
+cond63=>condition: for row in board
+cond84=>operation: print(character, end=' ') while  character in row
+sub96=>subroutine: print()
+e100=>end: end print_board
+op103=>operation: unmatched_pairs = 8
+cond106=>condition: while (unmatched_pairs > 0)
+sub189=>subroutine: print_board(board_upper)
+sub191=>subroutine: print('\n')
+sub193=>subroutine: print('Enter the coordinates for your first letter.')
+op195=>operation: x1 = (int(input('X (1-4): ')) - 1)
+op197=>operation: y1 = (int(input('Y (1-4): ')) - 1)
+sub199=>subroutine: print(('First letter is: ' + board[y1][x1]))
+sub201=>subroutine: print('Enter the coordinates for your second letter.')
+cond204=>condition: while True
+op225=>operation: x2 = (int(input('X (1-4):')) - 1)
+op227=>operation: y2 = (int(input('Y (1-4):')) - 1)
+cond230=>condition: if ((x2 != x1) or (y2 != y1))
+sub234=>subroutine: break
+sub238=>subroutine: print('Second letter should not be the first letter.')
+sub243=>subroutine: print(('Second letter is: ' + board[y2][x2]))
+cond246=>condition: if (board[y1][x1] == board[y2][x2])
+sub250=>subroutine: print('matched')
+op252=>operation: board_upper[y1][x1] = board[y1][x1]
+op254=>operation: board_upper[y2][x2] = board[y2][x2]
+op256=>operation: unmatched_pairs -= 1
+sub260=>subroutine: print('\n')
+sub262=>subroutine: print('Try again.')
+sub264=>subroutine: print('\n')
+sub269=>subroutine: print('Congratulations! You found all the pairs!')
+
+op2->op4
+op4->op6
+op6->sub8
+sub8->op10
+op10->op12
+op12->op14
+op14->cond17
+cond17(yes)->sub38
+sub38->op40
+op40->cond43
+cond43(yes)->sub47
+sub47->op49
+op49->cond17
+cond43(no)->cond17
+cond17(no)->st57
+st57->io59
+io59->cond63
+cond63(yes)->cond84
+cond84->sub96
+sub96(left)->cond63
+cond63(no)->e100
+e100->op103
+op103->cond106
+cond106(yes)->sub189
+sub189->sub191
+sub191->sub193
+sub193->op195
+op195->op197
+op197->sub199
+sub199->sub201
+sub201->cond204
+cond204(yes)->op225
+op225->op227
+op227->cond230
+cond230(yes)->sub234
+cond230(no)->sub238
+sub238->cond204
+cond204(no)->sub243
+sub243->cond246
+cond246(yes)->sub250
+sub250->op252
+op252->op254
+op254->op256
+op256->cond106
+cond246(no)->sub260
+sub260->sub262
+sub262->sub264
+sub264->cond106
+cond106(no)->sub269
